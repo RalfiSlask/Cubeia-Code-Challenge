@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @import './vendor/reset';
+@import './variables/custom-tailwind';
 
 * {
   box-sizing: border-box;
