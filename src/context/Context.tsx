@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useState } from 'react';
+import { createContext, ReactNode, useState, useEffect } from 'react';
 import { IModalStates, ICategory, IStudio } from '../utils/types/types';
 import data from '../data.json';
 import axios from 'axios';
@@ -11,6 +11,7 @@ interface IContext {
   studios: IStudio[];
   showAllGames: boolean;
   stagedSelectedStudios: number[];
+  toggleShowAllGamesOnClick: (state: boolean) => void;
   toggleModalOnClick: (modalKey: keyof IModalStates) => void;
   handleClickOnCurrency: (currency: string) => void;
   handleClickOnSelectStudio: (studioId: number) => void;
@@ -50,6 +51,14 @@ export const ContextProvider: React.FC<IChildren> = ({ children }) => {
     fetchCasinoData();
   }, []); */
 
+  const toggleModalOnClick = (modalKey: keyof IModalStates) => {
+    setModalStates(prev => ({ ...prev, [modalKey]: !prev[modalKey] }));
+  };
+
+  const toggleShowAllGamesOnClick = (state: boolean) => {
+    setShowAllGames(state);
+  };
+
   const handleClickOnSelectStudio = (studioId: number) => {
     setStagedSelectedStudios(prev => {
       const currentIndex = prev.indexOf(studioId);
@@ -64,10 +73,6 @@ export const ContextProvider: React.FC<IChildren> = ({ children }) => {
   const handleClickOnSelectButton = () => {
     setModalStates(prev => ({ ...prev, studios: false }));
     setSelectedStudios(stagedSelectedStudios);
-  };
-
-  const toggleModalOnClick = (modalKey: keyof IModalStates) => {
-    setModalStates(prev => ({ ...prev, [modalKey]: !prev[modalKey] }));
   };
 
   const handleClickOnCategory = (categoryId: number | null) => {
@@ -98,6 +103,7 @@ export const ContextProvider: React.FC<IChildren> = ({ children }) => {
     handleClickOnSelectButton: handleClickOnSelectButton,
     handleClickOnSelectStudio: handleClickOnSelectStudio,
     handleClickOnResetStudios: handleClickOnResetStudios,
+    toggleShowAllGamesOnClick: toggleShowAllGamesOnClick,
   };
 
   return <Context.Provider value={contextValue}>{children}</Context.Provider>;
