@@ -6,17 +6,20 @@ const ShowGamesButton = () => {
 
   if (!context) return;
 
-  const { showAllGames, toggleShowAllGamesOnClick } = context;
+  const { handleClickOnLoadMoreGames } = context;
 
   return (
     <div>
+      <button onClick={() => handleClickOnLoadMoreGames(false)} className="py-4 px-8 primaryButton">
+        Hide
+      </button>
       <button
-        className="py-4 px-8 primary-button"
+        className="py-4 px-8 primaryButton"
         onClick={() => {
-          toggleShowAllGamesOnClick(showAllGames ? false : true);
+          handleClickOnLoadMoreGames(true);
         }}
       >
-        {showAllGames ? 'Hide' : 'Show All'}
+        Load more
       </button>
     </div>
   );
