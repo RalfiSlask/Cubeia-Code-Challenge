@@ -1,35 +1,37 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useContext } from 'react';
+import { Context } from './context/Context';
+import ShowGamesButton from './components/main/ShowGamesButton';
+import Game from './components/main/Game';
+import Header from './components/header/Header';
+import PickStudios from './components/main/PickStudios';
+import Categories from './components/main/Categories';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const context = useContext(Context);
+
+  if (!context) return;
+
+  const { filteredGames, numberOfGamesVisible } = context;
+
+  const visibleGames = filteredGames.slice(0, numberOfGamesVisible);
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="flex flex-col gap-10 items-center">
+      <Header />
+      <main className="mt-[200px] flex flex-col gap-10 max-w-[1400px] items-center px-10 pb-20">
+        <PickStudios />
+        <Categories />
+        <div className="flex flex-col gap-10 w-full">
+          <div className="flex flex-wrap justify-center gap-10">
+            {visibleGames.map((game, index) => {
+              return <Game key={index} game={game} />;
+            })}
+          </div>
+        </div>
+        {filteredGames.length > 50 && <ShowGamesButton />}
+      </main>
+    </div>
+  );
 }
 
-export default App
+export default App;
