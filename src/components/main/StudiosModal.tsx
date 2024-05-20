@@ -1,6 +1,8 @@
 import Studio from './Studio';
 import { useContext } from 'react';
 import { Context } from '../../context/Context';
+import closeIcon from '../../assets/icons/close.svg';
+import resetIcon from '../../assets/icons/reset.svg';
 
 const StudiosModal = () => {
   const context = useContext(Context);
@@ -17,9 +19,11 @@ const StudiosModal = () => {
             toggleModalOnClick('studios');
           }}
         >
-          Close
+          <img src={closeIcon} alt="close icon" width="32" height="32" />
         </button>
-        <button onClick={handleClickOnResetStudios}>Reset</button>
+        <button onClick={handleClickOnResetStudios}>
+          <img src={resetIcon} alt="reset icon" width="32" height="32" />
+        </button>
       </div>
 
       <div className="flex-col-center overflow-y-auto h-full py-4 px-6 gap-4">
