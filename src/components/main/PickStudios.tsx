@@ -1,7 +1,7 @@
-import StudiosModal from './StudiosModal';
-import { useContext } from 'react';
+import React, { useContext, Suspense } from 'react';
 import { Context } from '../../context/Context';
 import arrowLogo from '../../assets/icons/filter.svg';
+const StudiosModal = React.lazy(() => import('./StudiosModal'));
 
 const PickStudios = () => {
   const context = useContext(Context);
@@ -24,8 +24,11 @@ const PickStudios = () => {
           <img src={arrowLogo} alt="filter icon" width="24" height="24" />
         </button>
       </div>
-
-      {modalStates.studios && <StudiosModal />}
+      {modalStates.studios && (
+        <Suspense fallback={<div>Loading...</div>}>
+          <StudiosModal />
+        </Suspense>
+      )}
     </>
   );
 };
