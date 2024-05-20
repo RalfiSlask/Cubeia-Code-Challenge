@@ -5,7 +5,9 @@ const Header = () => {
     <header className="fixed w-screen h-[100px] bg-secondaryBG flex items-center justify-between px-10">
       <div>
         <h1 className="text-2xl">Cubeia</h1>
-        <p>Code Challenge</p>
+        <p>
+          Code Challenge <span className="text-primaryButton">@RalfiSlask</span>
+        </p>
       </div>
 
       <Currencies />
