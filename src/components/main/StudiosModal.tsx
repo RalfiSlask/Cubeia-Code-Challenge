@@ -3,6 +3,7 @@ import { useContext } from 'react';
 import { Context } from '../../context/Context';
 import closeIcon from '../../assets/icons/close.svg';
 import resetIcon from '../../assets/icons/reset.svg';
+import { v4 as uuidv4 } from 'uuid';
 
 const StudiosModal = () => {
   const context = useContext(Context);
@@ -27,8 +28,8 @@ const StudiosModal = () => {
       </div>
 
       <div className="flex-col-center overflow-y-auto h-full py-4 px-6 gap-4">
-        {studios.map((studio, index) => {
-          return <Studio key={index} studio={studio} />;
+        {studios.map(studio => {
+          return <Studio key={uuidv4()} studio={studio} />;
         })}
       </div>
       <div className="border-t border-solid border-white h-[100px] flex-center">

@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { Context } from '../../context/Context';
 import { currencies } from '../../data/currencies';
 import arrowDownIcon from '../../assets/icons/arrow-down.svg';
+import { v4 as uuidv4 } from 'uuid';
 
 const Currencies = () => {
   const context = useContext(Context);
@@ -28,8 +29,8 @@ const Currencies = () => {
       </div>
       {modalStates.currencies && (
         <div className="bg-selectorBG absolute w-full left-0 pl-4 py-4 flex flex-col items-start gap-2 z-0">
-          {currencies.map((currency, index) => (
-            <button onClick={() => handleClickOnCurrency(currency)} className="hover:text-special" key={index}>
+          {currencies.map(currency => (
+            <button onClick={() => handleClickOnCurrency(currency)} className="hover:text-special" key={uuidv4()}>
               {currency}
             </button>
           ))}

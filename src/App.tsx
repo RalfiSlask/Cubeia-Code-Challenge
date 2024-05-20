@@ -5,6 +5,7 @@ import Game from './components/main/Game';
 import Header from './components/header/Header';
 import PickStudios from './components/main/PickStudios';
 import Categories from './components/main/Categories';
+import { v4 as uuidv4 } from 'uuid';
 
 function App() {
   const context = useContext(Context);
@@ -23,8 +24,8 @@ function App() {
         <Categories />
         <div className="flex flex-col gap-10 w-full">
           <div className="flex flex-wrap justify-center gap-10">
-            {visibleGames.map((game, index) => {
-              return <Game key={index} game={game} />;
+            {visibleGames.map(game => {
+              return <Game key={uuidv4()} game={game} />;
             })}
           </div>
         </div>
