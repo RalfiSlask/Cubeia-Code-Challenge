@@ -48,7 +48,7 @@ This project is marked as "Finished"
 
 ## Challenge Description
 
-This is a code challenge to build a casino lobby on a limited amount of time. The focus is mainly on logic and experience with React and a lite bit of UX. Orders is to fetch API and be able to filter games by studios, categories and currencies. These are connected to each other in the json data. 
+This is a code challenge to build a casino lobby on a limited amount of time. The focus is mainly on logic and experience with React and a litle bit of UX. Orders is to fetch API and be able to filter games by studios, categories and currencies. These are connected to each other in the json data. 
 
 ## Features
 
@@ -62,7 +62,7 @@ This is a code challenge to build a casino lobby on a limited amount of time. Th
 - Chose to use load more functionality to improve performance and UX, 50 games per click.
 - Used React.lazy on a bigger modal for studios.
 - Used useMemo when filtering games to memoize it due to large data sample.
-- Checked if the library react-window did any improvments on performance, but could not see it so i decided not to use it.
+- Checked if the library react-window did any improvements on performance, but could not see it so i decided not to use it.
 
 ### Future Improvments (out of scope)
 
