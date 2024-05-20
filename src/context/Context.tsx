@@ -1,6 +1,5 @@
 import { createContext, ReactNode, useState, useEffect, useMemo } from 'react';
-import { IModalStates, ICategory, IStudio, IGame } from '../utils/types/types';
-import data from '../data.json';
+import { IModalStates, ICategory, IStudio, IGame, ICasinoData } from '../utils/types/types';
 import axios from 'axios';
 
 interface IContext {
@@ -28,55 +27,40 @@ interface IChildren {
 export const Context = createContext<IContext | undefined>(undefined);
 
 export const ContextProvider: React.FC<IChildren> = ({ children }) => {
-  const [studios, setStudios] = useState<IStudio[]>(data.studios);
+  const [studios, setStudios] = useState<IStudio[]>([]);
   const [modalStates, setModalStates] = useState<IModalStates>({ currencies: false, studios: false });
   const [selectedCurrency, setSelectedCurrency] = useState('EUR');
   const [categories, setCategories] = useState<ICategory[]>([]);
   const [activeCategory, setActiveCategory] = useState<number | null>(null);
   const [stagedSelectedStudios, setStagedSelectedStudios] = useState<number[]>([]);
+  const [games, setGames] = useState<IGame[]>([]);
   const [selectedStudios, setSelectedStudios] = useState<number[]>([]);
   const [numberOfGamesVisible, setNumberOfGamesVisible] = useState(50);
 
-  /*   useEffect(() => {
+  const apiUrl = import.meta.env.VITE_API_URL;
+
+  useEffect(() => {
     const fetchCasinoData = async () => {
       try {
-        const response = await axios.get('https://cubeia-code-tests.s3.eu-west-1.amazonaws.com/lobby.json');
-        console.log(response.data);
-
-        setCasinoData(response.data);
+        const response = await axios.get<ICasinoData>(apiUrl);
+        const { games, studios, tags } = response.data;
+        setGames(games);
+        setStudios(studios); // Could sort by studio names here with localCompare();
+        const categoryAll: ICategory = { id: null, name: 'All', display: true, nameId: '', translations: {} };
+        const filteredCategories = tags.filter(
+          tag => tag.id !== null && games.some(game => game.gameTags.includes(tag.id as number))
+        );
+        setCategories([categoryAll, ...filteredCategories]);
       } catch (error) {
         console.error('Error fetching casino data', error);
       }
     };
 
     fetchCasinoData();
-  }, []); */
-
-  useEffect(() => {
-    console.log('studios', data.studios);
-    data.studios.sort((a, b) => {
-      if (a.name < b.name) {
-        return -1;
-      }
-      if (a.name > b.name) {
-        return 1;
-      }
-      return 0;
-    });
-    setStudios(data.studios);
-  }, []);
-
-  useEffect(() => {
-    // Add All category to categories array
-    const categoryAll: ICategory = { id: null, name: 'All', display: true, nameId: '', translations: {} };
-    const filteredCategories = data.tags.filter(tag => {
-      return data.games.some(game => game.gameTags.includes(tag.id));
-    });
-    setCategories([categoryAll, ...filteredCategories]);
   }, []);
 
   const filteredGames = useMemo(() => {
-    return data.games.filter(game => {
+    return [...games].filter(game => {
       const categorySelected = activeCategory === null || game.gameTags.includes(activeCategory);
       const selectedStudiosSelected = selectedStudios.length === 0 || selectedStudios.includes(game.studioId);
 
