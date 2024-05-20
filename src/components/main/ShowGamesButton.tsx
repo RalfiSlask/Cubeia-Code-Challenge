@@ -9,12 +9,15 @@ const ShowGamesButton = () => {
   const { handleClickOnLoadMoreGames } = context;
 
   return (
-    <div>
-      <button onClick={() => handleClickOnLoadMoreGames(false)} className="py-4 px-8 primaryButton">
+    <div className="flex gap-6">
+      <button
+        onClick={() => handleClickOnLoadMoreGames(false)}
+        className="py-4 px-8 bg-selectorBG hover:bg-[#4c4368] rounded-xl text-xl"
+      >
         Hide
       </button>
       <button
-        className="py-4 px-8 primaryButton"
+        className="py-4 px-8 primary-button"
         onClick={() => {
           handleClickOnLoadMoreGames(true);
         }}
