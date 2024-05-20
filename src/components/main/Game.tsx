@@ -25,14 +25,7 @@ const Game: React.FC<IGameProps> = ({ game }) => {
   return (
     <div className="h-[280px] w-[300px] bg-secondaryBG rounded-lg pb-4">
       <div className="w-full h-[200px]">
-        <img
-          src={imageUrl}
-          alt={name}
-          width="300"
-          height="300"
-          className="object-cover h-full rounded-t-lg"
-          loading="lazy"
-        />
+        <img src={imageUrl} alt={name} width="300" height="300" className="object-cover h-full rounded-t-lg" />
       </div>
       <div className="px-4 py-4">
         <h2>{name}</h2>
