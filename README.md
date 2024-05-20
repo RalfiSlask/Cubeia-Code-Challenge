@@ -72,6 +72,7 @@ This is a code challenge to build a casino lobby on a limited amount of time. Th
 - Further Performance improvment
 - Animation Libraries
 - Some images urls are not working
+- Further Testing of components
 
 ## Author
 
