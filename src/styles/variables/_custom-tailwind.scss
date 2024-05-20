@@ -1,0 +1,15 @@
+.primary-button {
+  @apply rounded-xl text-xl cursor-pointer bg-primaryButton hover:bg-primaryButtonHover;
+}
+
+.flex-center {
+  @apply flex justify-center items-center;
+}
+
+.flex-col-center {
+  @apply flex flex-col items-center;
+}
+
+.flex-between {
+  @apply flex items-center justify-between;
+}
