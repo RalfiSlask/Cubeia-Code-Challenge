@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import './vendor/reset';
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #07001a;
+  font-family: 'Roboto', sans-serif;
+}
