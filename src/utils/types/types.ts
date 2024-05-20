@@ -1,3 +1,9 @@
+export interface ICasinoData {
+  games: IGame[];
+  studios: IStudio[];
+  tags: ICategory[];
+}
+
 export interface IGame {
   id: number;
   name: string;
